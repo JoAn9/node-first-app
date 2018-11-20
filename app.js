@@ -18,4 +18,15 @@ const files = fs.readdir('./', function(err, files) {
 	if (err) console.log('Error', err);
 	else console.log('Result', files);
 });
-console.log(files);
+// console.log(files);
+
+const EventEmitter = require('events');
+const Logger = require('./logger');
+const emitter = new Logger();
+
+// Register a listener
+emitter.on('messageLogged', arg => {
+	console.log('Listener called', arg);
+});
+
+emitter.log('hello');
